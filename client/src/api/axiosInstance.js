@@ -30,7 +30,7 @@ axiosInstance.interceptors.response.use(
       try {
         //Refresh token call (cookie automatically jayegi)
         await axios.post(
-          `${import.meta.env.VITE_BACKEND_BASEURL}/auth/refresh-token`,
+          `${import.meta.env.VITE_BACKEND_BASEURL}/users/refresh-token`,
           {},
           { withCredentials: true },
         );
