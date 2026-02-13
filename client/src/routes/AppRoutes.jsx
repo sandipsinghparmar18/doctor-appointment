@@ -1,14 +1,14 @@
 import { Routes, Route } from "react-router-dom";
 
-import Login from "../pages/Login";
-import Register from "../pages/Register";
+import Login from "../pages/Login.jsx";
+import Register from "../pages/Register.jsx";
 
-import Home from "../pages/Home";
-import Services from "../pages/Services";
-import BookingAppointment from "../pages/BookingAppointment";
-import Appointments from "../pages/Appointments";
-import Profile from "../pages/Profile";
-import NotFound from "../pages/NotFound";
+import Home from "../pages/Home.jsx";
+import Services from "../pages/Services.jsx";
+import BookingAppointment from "../pages/BookingAppointment.jsx";
+import Appointments from "../pages/Appointments.jsx";
+import Profile from "../pages/Profile.jsx";
+import NotFound from "../pages/NotFound.jsx";
 
 import ProtectedRoute from "./ProtectedRoute";
 
