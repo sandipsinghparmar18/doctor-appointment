@@ -168,7 +168,7 @@ const updateProfile = asyncHandler(async (req, res) => {
   if (email !== req.user.email) {
     const existingUser = await User.findOne({ email });
     if (existingUser) {
-      throw new ApiError(400, "Another user with same email are available!");
+      throw new ApiError(409, "Another user with same email are available!");
     }
   }
 
@@ -280,7 +280,7 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
   const avatar = await uploadOnCloudinary(avatarLocalPath);
 
   if (!avatar.url) {
-    throw new ApiError(400, "Error while uploading the avatar on cloudinary");
+    throw new ApiError(500, "Error while uploading the avatar on cloudinary");
   }
 
   //take old avatar url from db and delete it from cloudinary
@@ -301,6 +301,13 @@ const updateUserAvatar = asyncHandler(async (req, res) => {
       new: true,
     },
   ).select("-password -refreshToken");
+
+  if (!user) {
+    throw new ApiError(
+      500,
+      "Internal server error while update the user avatar url",
+    );
+  }
 
   return res
     .status(200)

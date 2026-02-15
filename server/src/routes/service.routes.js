@@ -37,7 +37,7 @@ const router = Router();
  * @swagger
  * /services:
  *   post:
- *     summary: Create a new service
+ *     summary: Create a new service (Admin Only)
  *     tags: [Services]
  *     security:
  *       - cookieAuth: []
@@ -66,6 +66,14 @@ const router = Router();
  *     responses:
  *       201:
  *         description: Service created successfully
+ *       400:
+ *         description: all fields is required.
+ *       401:
+ *         description: Unauthorized request.
+ *       409:
+ *         description: service already exist.
+ *       500:
+ *         description: Internal error.
  */
 
 router
@@ -77,7 +85,7 @@ router
  * @swagger
  * /services/{serviceId}:
  *   delete:
- *     summary: Delete a service
+ *     summary: Delete a service (Admin Only)
  *     tags: [Services]
  *     security:
  *       - cookieAuth: []
@@ -91,6 +99,14 @@ router
  *     responses:
  *       200:
  *         description: Service deleted successfully
+ *       400:
+ *         description: Invalid service id.
+ *       401:
+ *         description: Unauthorized request.
+ *       404:
+ *         description: service not found.
+ *       500:
+ *         description: Internal error.
  */
 
 router.route("/:serviceId").delete(verifyJWT, verifyAdmin, deleteService);

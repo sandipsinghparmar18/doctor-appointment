@@ -57,7 +57,7 @@ const deleteService = asyncHandler(async (req, res) => {
     new mongoose.Types.ObjectId(serviceId),
   );
   if (!deleteBefore) {
-    throw new ApiError(400, "Invalid Service Id");
+    throw new ApiError(404, "Service not found");
   }
 
   const deletedService = await Service.findByIdAndDelete(deleteBefore._id);

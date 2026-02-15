@@ -44,6 +44,12 @@ const router = Router();
  *     responses:
  *       201:
  *         description: User registered successfully
+ *       400:
+ *         description: all fields is required.
+ *       409:
+ *         description: user already exist.
+ *       500:
+ *         description: Internal error.
  */
 router.post("/register", registerUser);
 
@@ -69,7 +75,13 @@ router.post("/register", registerUser);
  *                 type: string
  *     responses:
  *       200:
- *         description: Login successful
+ *         description: Login successful.
+ *       400:
+ *         description: email and password is required.
+ *       404:
+ *         description: user not found.
+ *       401:
+ *         description: Invalid credentials.
  */
 router.post("/login", loginUser);
 
@@ -84,6 +96,8 @@ router.post("/login", loginUser);
  *     responses:
  *       200:
  *         description: User logged out successfully
+ *       401:
+ *         description: Unauthorized request.
  */
 router.post("/logout", verifyJWT, logoutUser);
 
@@ -98,7 +112,9 @@ router.post("/logout", verifyJWT, logoutUser);
  *       - cookieAuth: []
  *     responses:
  *       200:
- *         description: User fetched successfully
+ *         description: User fetched successfully.
+ *       401:
+ *         description: Unauthorized request.
  */
 router.get("/me", verifyJWT, getCurrentUser);
 
@@ -119,6 +135,14 @@ router.get("/me", verifyJWT, getCurrentUser);
  *     responses:
  *       200:
  *         description: Profile updated successfully
+ *       400:
+ *         description: required fiels can not be empty.
+ *       401:
+ *         description: Unauthorized request.
+ *       409:
+ *         description: user already exist with these email.
+ *       500:
+ *         description: Internal error.
  */
 router.patch("/update-profile", verifyJWT, updateProfile);
 
@@ -146,7 +170,13 @@ router.patch("/update-profile", verifyJWT, updateProfile);
  *                 type: string
  *     responses:
  *       200:
- *         description: Password changed successfully
+ *         description: Password changed successfully.
+ *       400:
+ *         description: Old and new Password must be required || Invalid old password.
+ *       404:
+ *         description: user not found.
+ *       401:
+ *         description: Unauthorized request.
  */
 router.patch("/update-password", verifyJWT, changePassword);
 
@@ -171,6 +201,14 @@ router.patch("/update-password", verifyJWT, changePassword);
  *     responses:
  *       200:
  *         description: Avatar updated successfully
+ *       400:
+ *         description: fields is required.
+ *       401:
+ *         description: Unauthorized request.
+ *       501:
+ *         description: Error while uploading the avatar on cloudinary.
+ *       500:
+ *         description: Internal server error while update the user avatar url.
  */
 router.patch(
   "/update-avatar",
